@@ -1,13 +1,13 @@
 const axios = require('axios');
+const FormData = require('form-data');
 
 const BASE_URL = `https://${process.env.PIPEDRIVE_COMPANY_DOMAIN}.pipedrive.com/api/v1`;
 const API_TOKEN = process.env.PIPEDRIVE_API_TOKEN;
 
 /**
- * Cria uma pessoa e um lead no Pipedrive.
- * @param {{ name: string, email: string, phone?: string, company?: string, message?: string }} leadData
+ * Cria uma pessoa, um lead e anexa arquivo no Pipedrive.
  */
-exports.createLead = async ({ name, email, phone, company, message }) => {
+exports.createLead = async ({ name, email, phone, personType, file }) => {
     // 1. Cria a pessoa no Pipedrive
     const personPayload = {
         name,
@@ -24,15 +24,30 @@ exports.createLead = async ({ name, email, phone, company, message }) => {
 
     // 2. Cria o lead associado à pessoa
     const leadPayload = {
-        title: `Lead - ${name}`,
+        title: `Lead ADEEL (${personType === 'J' ? 'PJ' : 'PF'}) - ${name}`,
         person_id: personId,
-        ...(company && { organization_id: null }), // substituir por org se necessário
     };
 
     const { data: leadResponse } = await axios.post(
         `${BASE_URL}/leads?api_token=${API_TOKEN}`,
         leadPayload
     );
+
+    const leadId = leadResponse.data.id;
+
+    // 3. Se houver arquivo (fatura), faz o upload vinculado ao lead
+    if (file) {
+        const form = new FormData();
+        form.append('file', file.buffer, {
+            filename: file.originalname,
+            contentType: file.mimetype,
+        });
+        form.append('lead_id', leadId);
+
+        await axios.post(`${BASE_URL}/files?api_token=${API_TOKEN}`, form, {
+            headers: form.getHeaders(),
+        });
+    }
 
     return leadResponse.data;
 };

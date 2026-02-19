@@ -5,8 +5,16 @@ export default function Footer() {
     return (
         <footer className={styles.footer}>
             <div className={`container ${styles.inner}`}>
-                <span className={styles.logo}>Marca</span>
-                <p className={styles.copy}>© {new Date().getFullYear()} Sua Empresa. Todos os direitos reservados.</p>
+                <div className={styles.logos}>
+                    <img
+                        src="http://adeel.com.br/wp-content/uploads/2023/06/adeelnome.png"
+                        alt="Adeel Logo"
+                        className={styles.logoName}
+                    />
+                </div>
+                <p className={styles.copy}>
+                    © {new Date().getFullYear()} Adeel & Simplifica Energia. Todos os direitos reservados.
+                </p>
             </div>
         </footer>
     );

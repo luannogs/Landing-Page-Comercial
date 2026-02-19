@@ -10,15 +10,23 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    const scrollToForm = () => {
+        const form = document.querySelector('#contact');
+        if (form) form.scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
         <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
             <div className={`container ${styles.inner}`}>
-                <span className={styles.logo}>Marca</span>
-                <nav className={styles.nav}>
-                    <a href="#features">Benefícios</a>
-                    <a href="#contact">Contato</a>
-                </nav>
-                <a href="#contact" className="btn-primary">Fale Conosco</a>
+                <div className={styles.logos}>
+
+                    <img
+                        src="http://adeel.com.br/wp-content/uploads/2023/06/adeelnome.png"
+                        alt="Adeel Logo"
+                        className={styles.logoName}
+                    />
+                </div>
+                <button onClick={scrollToForm} className="btn-primary btn-verde">Contratar Agora</button>
             </div>
         </header>
     );

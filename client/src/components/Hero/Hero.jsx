@@ -1,24 +1,27 @@
 import React from 'react';
 import styles from './Hero.module.css';
+import bannerImg from '../../assets/imagem-topo.png';
 
 export default function Hero() {
     return (
         <section className={styles.hero} id="hero">
             <div className={`container ${styles.content}`}>
-                <span className={styles.badge}>✦ Novidade 2025</span>
-                <h1 className={styles.title}>
-                    Transforme visitantes em <span>clientes reais</span>
-                </h1>
-                <p className={styles.subtitle}>
-                    Nossa solução conecta seu marketing ao Pipedrive automaticamente,
-                    capturando cada lead e nutindo-o até a venda.
-                </p>
-                <div className={styles.cta}>
-                    <a href="#contact" className="btn-primary">Quero começar agora</a>
-                    <a href="#features" className={styles.linkSecondary}>Ver benefícios →</a>
+                <div className={styles.text}>
+                    <p className={styles.topText}>Economia Inteligente:</p>
+                    <h1 className={styles.title}>
+                        Geração Distribuída e <span>Redução na Conta de Energia</span>
+                    </h1>
+                    <p className={styles.subtitle}>
+                        Soluções em parceria com a <strong>Simplifica Energia</strong> para você reduzir sua fatura em até 25% com energia limpa e renovável.
+                    </p>
+                    <div className={styles.cta}>
+                        <a href="#contact" className="btn-primary btn-verde">Quero economizar agora</a>
+                    </div>
+                </div>
+                <div className={styles.imageWrapper}>
+                    <img src={bannerImg} alt="Economia de Energia" className={styles.bannerImg} />
                 </div>
             </div>
-            <div className={styles.glow} aria-hidden="true" />
         </section>
     );
 }
