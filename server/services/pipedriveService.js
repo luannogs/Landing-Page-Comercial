@@ -25,7 +25,7 @@ exports.createLead = async ({ name, email, phone, personType, file }) => {
     // 2. Cria o lead associado à pessoa
     const leadPayload = {
         title: `Lead ADEEL (${personType === 'J' ? 'PJ' : 'PF'}) - ${name}`,
-        person_id: personId, label: 'ADEEL'
+        person_id: personId, '95d8226e0f77e5a35d5b1db96a2b97f95263853f': 'ADEEL'
     };
 
     const { data: leadResponse } = await axios.post(
