@@ -1,4 +1,5 @@
 const pipedriveService = require('../services/pipedriveService');
+const emailService = require('../services/emailService');
 
 /**
  * POST /api/leads
@@ -13,7 +14,19 @@ exports.createLead = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Nome e e-mail são obrigatórios.' });
         }
 
+        // 1. Cria o lead no Pipedrive
         const result = await pipedriveService.createLead({
+            name,
+            email,
+            phone,
+            personType,
+            file
+        });
+
+        // 2. Envia o e-mail com os dados do lead
+        // Disparamos sem aguardar o retorno (opcional) ou aguardamos se quisermos garantir o envio
+        // Aqui vou aguardar para garantir que logamos o sucesso/falha
+        await emailService.sendLeadEmail({
             name,
             email,
             phone,
