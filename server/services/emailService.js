@@ -20,7 +20,7 @@ exports.sendLeadEmail = async ({ name, email, phone, personType, file }) => {
     try {
         const mailOptions = {
             from: `"Landing Page ADEEL" <${process.env.SMTP_USER}>`,
-            to: process.env.EMAIL_TO || 'novos.negocios@simplificaenergia.com.br',
+            to: process.env.EMAIL_TO || 'nathalia.costa@adeel.com.br, rafael.adorno@adeel.com.br',
             subject: `Novo Lead Capturado: ${name}`,
             text: `
                 Novo lead capturado via Landing Page:
