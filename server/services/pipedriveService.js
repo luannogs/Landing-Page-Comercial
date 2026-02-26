@@ -15,25 +15,30 @@ exports.createLead = async ({ name, email, phone, personType, file }) => {
         ...(phone && { phone: [{ value: phone, primary: true }] }),
     };
 
+    const labelId = '95d8226e0f77e5a35d5b1db96a2b97f95263853f';
+
     const { data: personResponse } = await axios.post(
         `${BASE_URL}/persons?api_token=${API_TOKEN}`,
         personPayload
     );
 
     const personId = personResponse.data.id;
-
     // 2. Cria o lead associado à pessoa
     const leadPayload = {
         title: `Lead ADEEL (${personType === 'J' ? 'PJ' : 'PF'}) - ${name}`,
-        person_id: personId, '95d8226e0f77e5a35d5b1db96a2b97f95263853f': 'ADEEL'
-    };
+        person_id: personId,
+        [labelId]: '956'
+    }
+
 
     const { data: leadResponse } = await axios.post(
         `${BASE_URL}/leads?api_token=${API_TOKEN}`,
         leadPayload
     );
 
-    const leadId = leadResponse.data.id;
+    const leadId = leadResponse;
+
+    console.log(leadId)
 
     // 3. Se houver arquivo (fatura), faz o upload vinculado ao lead
     if (file) {
