@@ -204,11 +204,35 @@
 }
 
 @media (max-width: 1000px) {
+    .adesao {
+        padding: 4rem 0;
+    }
+
     .imagem {
         display: none;
     }
 
     .formContainer {
         max-width: 100%;
+        padding: 0 2rem;
+    }
+
+    .formHeader {
+        font-size: 2rem;
+        padding-left: 4.5rem;
+        background-size: 3.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .tipoPessoa {
+        gap: 1.5rem;
+    }
+
+    .form input:not([type="radio"]),
+    .fileLabel,
+    .submitBtn {
+        height: 5rem;
+        font-size: 1.6rem;
     }
 }

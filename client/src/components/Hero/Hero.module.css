@@ -61,35 +61,47 @@
 
 @media (max-width: 1000px) {
     .hero {
-        padding: 4rem 0;
+        padding: 6rem 0;
     }
 
     .topText,
     .title {
-        font-size: 4rem;
+        font-size: 3.6rem;
     }
 }
 
 @media (max-width: 700px) {
+    .hero {
+        padding: 4rem 0 6rem 0;
+    }
+
     .content {
         flex-direction: column;
         text-align: center;
+        gap: 3rem;
     }
 
     .text {
         text-align: center;
     }
 
+    .topText,
+    .title {
+        font-size: 3rem;
+    }
+
     .subtitle {
         margin-left: auto;
         margin-right: auto;
+        font-size: 1.6rem;
     }
 
     .imageWrapper {
         justify-content: center;
+        order: -1;
     }
 
     .bannerImg {
-        max-width: 40rem;
+        max-width: 32rem;
     }
 }
