@@ -36,9 +36,9 @@ exports.createLead = async ({ name, email, phone, personType, file }) => {
         leadPayload
     );
 
-    const leadId = leadResponse;
+    const leadId = leadResponse.data.id;
 
-    console.log(leadId)
+    console.log('[PipedriveService] Lead criado:', leadId);
 
     // 3. Se houver arquivo (fatura), faz o upload vinculado ao lead
     if (file) {
@@ -47,11 +47,15 @@ exports.createLead = async ({ name, email, phone, personType, file }) => {
             filename: file.originalname,
             contentType: file.mimetype,
         });
-        form.append('lead_id', leadId);
+
+        // No Pipedrive, o campo é 'item_type' (lead ou deal) e 'item_id'
+        form.append('item_type', 'lead');
+        form.append('item_id', leadId);
 
         await axios.post(`${BASE_URL}/files?api_token=${API_TOKEN}`, form, {
             headers: form.getHeaders(),
         });
+        console.log('[PipedriveService] Arquivo anexado ao lead.');
     }
 
     return leadResponse.data;
